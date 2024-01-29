@@ -2,7 +2,7 @@
 from typing import Any
 from django.db.models.base import Model as Model
 from django.db.models.query import QuerySet
-from .forms import userCreationForWithEmail, Profileform
+from .forms import userCreationForWithEmail, Profileform, EmailForm
 from django.views.generic import CreateView
 #from django.views.generic.base import TemplateView
 from django.views.generic.edit import UpdateView
@@ -41,3 +41,21 @@ class ProfileUpdate(UpdateView):
         #conseguir o crear a parit del filtro , si no existe lo crea
         profile, created = Profile.objects.get_or_create(user=self.request.user)
         return profile
+@method_decorator(login_required, name='dispatch')
+class EmailUpdate(UpdateView):
+    form_class = EmailForm   
+    success_url = reverse_lazy('profile')
+    template_name = 'registration/profile_email_form.html' 
+    #Recuperar el perfil a traves del identificador del usuario que hay en request
+    
+    def get_object(self):  
+        #Recuperar el objeto que se va a editar     
+        return self.request.user #Recuperamos la instancia del usuario
+
+    def get_form(self, form_class=None):
+        form = super (EmailUpdate, self).get_form()
+        #Modificamos el form en tiempo real con widgets
+        form.fields['email'].widget = forms.EmailInput(
+            attrs={'class':'form_control mb-2','placeholder':'Email'})
+                
+        return form
