@@ -28,30 +28,31 @@
                 <a class="nav-link" href="{% url 'home' %}">Inicio</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{% url 'pages:pages' %}">Página</a>
+                <a class="nav-link" href="{% url 'pages:pages' %}">Páginas</a>
+              </li>    
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'profiles:list' %}">Perfiles</a>
               </li>
             </ul>
             <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="/admin/">
-                <!-- {% if request.user.is_staff %}Admin{% else %}Acceder{% endif %}-->
-                {% if not request.user.is_authenticated %}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'login' %}">Acceder</a>
-                  </li>
-                  <li class="nav-item">
+              {% if not request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'login' %}">Acceder</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" href="{% url 'signup' %}">Registro</a>
                   </li>
-                {%else%}
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' %}">Perfil</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Salir</a>
-                  </li>
-                {%endif%}
-              </a>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'messenger:list' %}">Mensajes</a>
               </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'profile' %}">Perfil</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout' %}">Salir</a>
+                </li>
+              {% endif %}
             </ul>
           </div>
         </div>
