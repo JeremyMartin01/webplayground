@@ -27,6 +27,7 @@ class ThreadManager(models.Manager):
         
 
 class Thread(models.Model):
+    #Many to many no aceptan el ordenamiento directamente
     users = models.ManyToManyField(User, related_name='threads')
     messages = models.ManyToManyField(Message)
     updated = models.DateTimeField(auto_now=True)

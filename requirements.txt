@@ -37,6 +37,7 @@ django-oauth-toolkit==2.1.0
 django-redis==5.2.0
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.2.0
+env==0.1.0
 et-xmlfile==1.1.0
 filelock==3.6.0
 html5lib==1.1
